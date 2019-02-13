@@ -43,7 +43,12 @@ td {
 div {
   &.field, &.actions {
     margin-bottom: 10px;
+   
   }
+}
+
+strong {
+  color: #000;
 }
 
 #notice {
