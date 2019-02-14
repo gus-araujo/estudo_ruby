@@ -23,6 +23,11 @@
 					<li><a href="index.html">Home</a></li>
 					<li><a href="generic.html">Generic</a></li>
 					<li><a href="elements.html">Elements</a></li>
+					<li><a href="elements.html">Sign in</a></li>
+					<li><a href="elements.html">Sign up</a></li>
+					<% if user_signed_in? %>
+					<li><a href=<% link_to destroy_user_session_path, method: :delete %>> Sign Out</a></li>
+					<% end %>
 				</ul>
 			</nav>
 
@@ -35,7 +40,7 @@
 				<section id="banner" data-video="assets/banner">
 					<div class="inner">
 						<header>
-							<h1>#TáNaMídia</h1>
+							<h1 class="logoname">#TáNaMídia</h1>
 							<p>Morbi eu purus eget urna interdum dignissim sed consectetur augue<br />
 							vivamus vitae libero in nulla iaculis eleifend non sit amet nulla.</p>
 						</header>
@@ -298,7 +303,7 @@
 				</section>
 
 			<!-- Three -->
-				<section class="wrapper ">
+				<section class="wrapper style1">
 					<div class="inner">
 						<header class="align-center">
 							<h2>Aliquam ipsum purus dolor</h2>

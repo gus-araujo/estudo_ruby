@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users
   root 'welcome#index'
- # get 'welcome#generic'
- # get 'welcome#elements'
+  get 'generic' => 'welcome#generic' , as: 'generic'
+  get 'elements' => 'welcome#elements', as: 'elements'
  # get 'welcome/generic' => 'welcome#generic'#, as: generic
 
   resources :users

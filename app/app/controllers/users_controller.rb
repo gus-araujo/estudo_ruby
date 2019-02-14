@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /users
   # GET /users.json
@@ -7,6 +8,9 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def search
+    User.find_by[:email]
+  end
   # GET /users/1
   # GET /users/1.json
   def show
@@ -15,7 +19,6 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    
   end
 
   # GET /users/1/edit
