@@ -24,8 +24,9 @@
 					<li><a href="generic.html">Generic</a></li>
 					<li><a href="elements.html">Elements</a></li>
 					<li><a href="elements.html">Sign in</a></li>
-					<li><a href="elements.html">Sign up</a></li>
+					<li><a href="">Sign up</a></li>
 					<% if user_signed_in? %>
+					<li><a href=<% link_to 'administration' , method: :get %>> Administration</a></li>
 					<li><a href=<% link_to destroy_user_session_path, method: :delete %>> Sign Out</a></li>
 					<% end %>
 				</ul>
