@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'generic' => 'welcome#generic' , as: 'generic'
   get 'elements' => 'welcome#elements', as: 'elements'
+  get 'index' => 'welcome#index'
   get 'administration' => 'administration#index', as: 'administration'
 
   resources :users
