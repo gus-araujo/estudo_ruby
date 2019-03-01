@@ -43,3 +43,4 @@ input.each do |linha|
 end
 puts `psql -U solucao -c "select * from solucao"`
 conn.close
+187.32.172.162
