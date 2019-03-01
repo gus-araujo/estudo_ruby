@@ -1,4 +1,4 @@
-Writing Fast Tests Against Enterprise Rails 6Overdoing it in Python 45min
+Writing Fast Tests Against Enterprise Rails Overdoing it in Python 45min
 Lua for the Masses 30min
 Ruby Errors from Mismatched Gem VersionsCommon Ruby Errors 45min
 Rails for Python Developers lightning
