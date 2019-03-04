@@ -2,7 +2,7 @@ if !`gem list`.include? 'pg'
     `gem install pg`
 end
 require 'pg'
-
+`systemctl start postgresql.services`
 `psql -U postgres -c "DROP DATABASE solucao;"`
 `psql -U postgres -c "DROP USER solucao;"`
 `sudo -i -u postgres createuser solucao`
@@ -42,4 +42,6 @@ input.each do |linha|
     end
 end
 puts `psql -U solucao -c "select * from solucao"`
+
+
 conn.close
