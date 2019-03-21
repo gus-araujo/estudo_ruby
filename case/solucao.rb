@@ -11,7 +11,7 @@ class Meeting
         @@count+=1
 		@@names += [name]
 		@@durations += [duration]
-		@@all += [[name, duration]]
+		@@all += [[id, name, duration]]
 	end
 
     def self.count	
@@ -34,13 +34,15 @@ class Meeting
 		end
 	end
 	def self.all
-		@@all.each do |name,duration|
-			puts name + duration.to_s + "min"
-		end
+		@@all
     end
     
     def self.delete
         @@all.delete_at(@id-1)
+    end
+
+    def self.get_by_id(id)
+        self.all[id-1]
     end
 end
 
@@ -68,5 +70,4 @@ def create_calendar
     afternoon_session = 180 
     morning_session = 180
 
-    
 end
