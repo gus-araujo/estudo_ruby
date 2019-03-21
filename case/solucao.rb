@@ -37,28 +37,36 @@ class Meeting
 		@@all.each do |name,duration|
 			puts name + duration.to_s + "min"
 		end
-	end
+    end
+    
+    def self.delete
+        @@all.delete_at(@id-1)
+    end
+end
+
+def load_data
+    input = File.open("input.txt")
+    input.each do |linha|
+        if linha.include?"lightning"
+            key = linha[0..(linha.length - "lightning".length-2)].gsub("\n",'')
+            Meeting.new(key, 5)
+        else 
+            key = linha[0...(linha.length)-6]
+            value = linha[(linha.length)-6...linha.length].strip
+            value = value.delete("min").strip.to_i
+            Meeting.new(key, value)
+        end
+    end
 end
 
 class Calendar < Meeting
 end
 
-current_time = 0
-max_time = 480
-afternoon_session =180 
-morning_session = 180
+def create_calendar
+    current_time = 0
+    max_time = 480
+    afternoon_session = 180 
+    morning_session = 180
 
-input = File.open("input.txt")
-input.each do |linha|
-    if linha.include?"lightning"
-        key = linha[0..(linha.length - "lightning".length-2)].gsub("\n",'')
-        Meeting.new(key, 5)
-    else 
-        key = linha[0...(linha.length)-6]
-        value = linha[(linha.length)-6...linha.length].strip
-        value = value.delete("min").strip.to_i
-        Meeting.new(key, value)
-    end
+    
 end
-puts Meeting.count
-Meeting.all
