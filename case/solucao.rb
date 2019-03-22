@@ -70,4 +70,15 @@ def create_calendar
     afternoon_session = 180 
     morning_session = 180
 
+    if current_time == 180 
+        current_time = 240
+    end        
+    
+    durations = []
+
+    Meeting.all.each do |id, name, duration|
+        durations[id-1] = {"id" => id, "duration"=>duration}
+    end
+
+
 end
