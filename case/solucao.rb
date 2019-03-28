@@ -1,83 +1,57 @@
 class Meeting
-    attr_accessor :id, :name, :duration
-    @@count = 0
-    @@names = []
-	@@durations = []
-	@@all = []
+    attr_accessor  :name, :duration
+
     def initialize(name, duration)
         @name = name
         @duration = duration
-        @id=@@count+1 
-        @@count+=1
-		@@names += [name]
-		@@durations += [duration]
-		@@all += [[id, name, duration]]
 	end
-
-    def self.count	
-        @@count
-    end
-		
-	def self.id
-        @id
-    end
-	
-	def self.names
-		@@names.each do |names|
-			puts names
-		end
-	end
-	
-	def self.durations
-		@@durations.each do |durations|
-			puts durations
-		end
-	end
-	def self.all
-		@@all
-    end
+class ClassName
     
-    def self.delete
-        @@all.delete_at(@id-1)
-    end
-
-    def self.get_by_id(id)
-        self.all[id-1]
-    end
+end
 end
 
-def load_data
-    input = File.open("input.txt")
-    input.each do |linha|
-        if linha.include?"lightning"
-            key = linha[0..(linha.length - "lightning".length-2)].gsub("\n",'')
-            Meeting.new(key, 5)
-        else 
-            key = linha[0...(linha.length)-6]
-            value = linha[(linha.length)-6...linha.length].strip
-            value = value.delete("min").strip.to_i
-            Meeting.new(key, value)
+
+class ProcessInput
+  
+    def initialize(filename)
+        raise "File does not exist" unless File.exists? filename
+        @file = File.open(filename)
+    end
+
+    def process
+        @meetings = []
+        @file.each do |line|
+            if line.include? "lightning"
+                key = line.gsub("lightning", "").strip
+                @meetings << Meeting.new(key, 5)
+            else 
+                key = line.gsub(/\d.*/, "").strip
+                value = line.gsub(/\D/,"").to_i
+                @meetings << Meeting.new(key, value)
+            end
         end
     end
+
+    def meetings
+        @meetings
+    end
+
 end
 
-class Calendar < Meeting
-end
 
+MAX_TIME_MINUTES = 480
+AFTERNOON_SESSION_MINUTES = 180 
+MORNING_SESSION_MINUTES = 180
 def create_calendar
-    current_time = 0
-    max_time = 480
-    afternoon_session = 180 
-    morning_session = 180
+    current_time_minutes = 0
 
-    if current_time == 180 
-        current_time = 240
+    if current_time_minutes == 180 
+        current_time_minutes = 240
     end        
     
-    durations = []
-
-    Meeting.all.each do |id, name, duration|
-        durations[id-1] = {"id" => id, "duration"=>duration}
+    durations = Hash.new
+    Meeting.all.each do |name, duration|
+        durations << = {key:meetings.name, duration: meetings.duration}
     end
 
 
