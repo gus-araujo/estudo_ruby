@@ -4,10 +4,8 @@ class Meeting
     def initialize(name, duration)
         @name = name
         @duration = duration
-	end
-class ClassName
+    end
     
-end
 end
 
 
@@ -42,7 +40,7 @@ end
 MAX_TIME_MINUTES = 480
 AFTERNOON_SESSION_MINUTES = 180 
 MORNING_SESSION_MINUTES = 180
-def create_calendar
+def create_calendar(file)
     current_time_minutes = 0
 
     if current_time_minutes == 180 
@@ -50,9 +48,8 @@ def create_calendar
     end        
     
     durations = Hash.new
-    Meeting.all.each do |name, duration|
-        durations << = {key:meetings.name, duration: meetings.duration}
+    file.meetings.each do |meeting|
+        durations[meeting.name] = meeting.duration
     end
-
-
+    return durations
 end
