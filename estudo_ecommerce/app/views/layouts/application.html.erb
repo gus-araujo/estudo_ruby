@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EstudoEcommerce</title>
-    <%= csrf_meta_tags %>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <title>Fast</title>
+    
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
   </head>
 
+
   <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= render 'layouts/header' %>
     <%= yield %>
   </body>
 </html>
