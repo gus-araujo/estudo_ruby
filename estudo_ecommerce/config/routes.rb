@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   resources :products
+  devise_for :users
   get 'contato', to: 'home#contact'
   get 'sobre', to: 'home#about'
-  devise_for :users
   root 'home#Index'
   
   resources :users

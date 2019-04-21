@@ -13,3 +13,16 @@
 #         gender: Faker::Gender.binary_type
 #     )
 # end
+
+Category.create(
+    slug: 'roupas'
+)
+Category.create(
+    slug: 'acessorios'
+)
+Category.create(
+    slug: 'sapatos'
+)
+Category.create(
+    slug: 'outros'
+)
