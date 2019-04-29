@@ -12,25 +12,25 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
       </li>
+      
+    <% if user_signed_in?%>  
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"s role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+          Meu perfil
         </a>
+      
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="/myposts">Meus Posts</a>
+          <a class="dropdown-item" href="/users/edit">Alterar minhas informações</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+            <%= link_to "Sair", destroy_user_session_path, :method => :delete, :class => "dropdown-item"%>
         </div>
       </li>
-
+    <%else%>
       <li class="nav-item">
-        <% if user_signed_in?%>
-          <%= link_to "Sair", destroy_user_session_path, :method => :delete, :class => "nav-link"%>
-        <%else%>
-          <a class="nav-link" href="/users/sign_in" tabindex="-1">Entrar</a>
-        </li>
-       <% end %>
+        <a class="nav-link" href="/users/sign_in" tabindex="-1">Entrar</a>
+      </li>
+    <% end %>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
