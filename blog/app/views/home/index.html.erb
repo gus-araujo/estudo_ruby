@@ -1,2 +1,12 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="col-sm-7">
+  <h1>Home#index</h1>
+  <p>Find me in app/views/home/index.html.erb</p>
+
+  <% @posts.sort{|post| post.created_at}.each do |post|%>
+
+  <%= post.title%>
+  <br>
+  <%end%>
+
+</div>
+

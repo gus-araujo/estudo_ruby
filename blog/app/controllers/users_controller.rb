@@ -62,10 +62,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def myposts
-    @user = current_user
-  end
-
   ########################
   
   private
