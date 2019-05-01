@@ -1,9 +1,37 @@
 class Meeting
-	attr_accessor  :name, :duration
-
+	attr_accessor  :name, :duration, :value
+	@@all = []
+	@@names = []
+	@@durations = []
+	@@values = []
 	def initialize(name, duration)
 		@name = name
 		@duration = duration
+		@value = duration/5
+		@@all << self
+		@@names << name
+		@@durations << duration
+		@@values << @value
+	end
+
+	def self.all
+		@@all
+	end
+
+	def self.names	
+		@@names
+	end
+
+	def self.durations
+		@@durations
+	end
+
+	def self.count
+		@@all.length
+	end
+
+	def self.values
+		@@values
 	end
 
 end
@@ -17,77 +45,63 @@ class ProcessInput
 	end
 
 	def process
-			@meetings = []
 			@file.each do |line|
 					if line.include? "lightning"
 							key = line.gsub("lightning", "").strip
-							@meetings << Meeting.new(key, 5)
+							Meeting.new(key, 5)
 					else
 							key = line.gsub(/\d.*/, "").strip
 							value = line.gsub(/\D/,"").to_i
-							@meetings << Meeting.new(key, value)
+							Meeting.new(key, value)
 					end
 			end
 	end
-
-	def meetings
-			@meetings
-	end
-
 end
 
 file = ProcessInput.new("input.txt")
 file.process
 
-MAX_TIME_MINUTES = 480
-AFTERNOON_SESSION_MINUTES = 180
-MORNING_SESSION_MINUTES = 180
-def create_calendar(file)
+SESSIONS_MIN = 180
 
-	current_time_minutes = 0
-	current_time_hours = 9
-	full_time = 0
 
-	durations = Hash.new
-	file.meetings.each do |meeting|
-			durations[meeting.name] = meeting.duration
+def create_calendar
+	table = [[]]
+	num_meetings = Meeting.count 
+	num_meetings.times do |i|
+		table[i] = []
 	end
 
-	durations = durations.sort_by{|name, duration| duration}
-	prefix = "AM"
-	
-	durations.each do |name, duration|
-			final_current_time_hours = ""
-			final_current_time_minutes = ""
+	num_meetings.times do |i|
+	 table[i][0] = 0 
+	end
 
-			if current_time_hours == 12
-					current_time_hours = 1
-					afternoon = true
-			end
+	SESSIONS_MIN.times do |i|
+		table[0][i] = 0
+	end
 
-			if afternoon
-					prefix = "PM"
-			end
-
-			if current_time_minutes < 10
-				final_current_time_minutes = "0" + current_time_minutes.to_s
-			else 
-				final_current_time_minutes = current_time_minutes.to_s
-			end
-
-			if current_time_hours < 10
-				final_current_time_hours = "0" + current_time_hours.to_s 
+	for i in 0..num_meetings-1
+		for j in 0..SESSIONS_MIN-1
+			if Meeting.all[i].duration < j && i > 0
+				table[i][j] = Meeting.all[i].value + table[i-1][j-i]
+			elsif i>0
+				table[i][j] = table[i-1][j]
 			else
-				final_current_time_hours = current_time_hours.to_s
+				table[i][j] = 0 
 			end
-			
-			puts final_current_time_hours + ":" + final_current_time_minutes + ' ' + prefix + ' ' + name
+		end
+	end 
 
-			current_time_minutes += duration
-			
-			if current_time_minutes >= 60
-					current_time_hours += 1
-					current_time_minutes = current_time_minutes - 60
+	meetings = []
+
+	for i in (Meeting.count-1).downto(0)
+		for j in SESSIONS_MIN.downto(0)
+			if table[i][j] != table[i-1][j]
+				meetings << Meeting.all[i] 
+				j = j-Meeting.all[i].duration
 			end
+		end
+		
 	end
+	return meetings
+
 end
