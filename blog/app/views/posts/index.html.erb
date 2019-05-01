@@ -14,7 +14,9 @@
   </thead>
 
   <tbody>
-    <% @posts.each do |post|
+    <% 
+    @posts = @posts.sort{|post| post.created_at}
+    @posts.each do |post|
     begin 
       user = User.find(post.user_id)
     rescue
