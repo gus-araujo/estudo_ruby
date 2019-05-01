@@ -65,6 +65,10 @@ class PostsController < ApplicationController
   def myposts
     @user = current_user
   end
+
+  def authors
+    @authors = Post.distinct.select(:user_id)
+  end
 ########################################
   private
     # Use callbacks to share common setup or constraints between actions.

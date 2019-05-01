@@ -1,0 +1,32 @@
+<div class="col-sm-12 ">
+  <br>
+  <div class="row justify-content-center">
+    <% 
+    i=0
+    @authors.each do |author|
+      user = author.user
+    %>
+    <div class="col-3">  
+      <div class="card w-100 h-100 p-3" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%=user.name%></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%=user.email%></h6>
+          <br>
+          <a class="card-subtitle mb-2 text-muted">Número de posts <br><small><%= user.post.count%></a></small>
+        </div>
+      </div>
+    </div>
+    <%
+      i+=1
+    
+      if @authors.count - i < 2 
+        break
+      end
+    
+      if i % 3 == 0 
+    %>
+        </div>
+        <div class="row justify-content-center">
+      <%end%>
+    <%end%>
+</div>
