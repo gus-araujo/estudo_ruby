@@ -100,8 +100,8 @@ def create_calendar
 				j = j-Meeting.all[i].duration
 			end
 		end
-		
 	end
+	
 	return meetings
 
 end
