@@ -1,40 +1,46 @@
-<p id="notice"><%= notice %></p>
+<div class="col-sm-12">
+  <p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Author</th>
-      <th scope="col">Title</th>
-      <th scope="col">Body</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% 
-    @posts = @posts.sort{|post| post.created_at}
-    @posts.each do |post|
-    begin 
-      user = User.find(post.user_id)
-    rescue
-      0
-    end
-     %>
+  <ul class="list-group list-group-horizontal" >
+    <li class="list-group-item border-0"><h1>Posts</h1></li>
+    <li class="list-group-item border-0"></li>
+    <li class="list-group-item border-0"><%= link_to 'New Post', new_post_path,class: "btn btn-outline-primary btn-lg btn-block"%></li>
+  </ul>
+  <br>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= begin user.email rescue " " end%></td>
-        <td><%= post.title %></td>
-        <td><%= post.body %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th scope="col">Author</th>
+        <th scope="col">Title</th>
+        <th scope="col">Body</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% 
+      @posts = @posts.sort{|post| post.created_at}
+      @posts.each do |post|
+      begin 
+        user = User.find(post.user_id)
+      rescue
+        0
+      end
+      %>
+        <tr>
+          <td><%= begin user.email rescue " " end%></td>
+          <td><%= post.title %></td>
+          <td><%= post.body %></td>
+          <td><%= link_to 'Show', post %></td>
+          <td><%= link_to 'Edit', edit_post_path(post) %></td>
+          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <br>
+</div>
 
-<%= link_to 'New Post', new_post_path %>
