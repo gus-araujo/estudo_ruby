@@ -8,6 +8,16 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def search
+    if params[:search]
+       
+      @posts = Post.where("title like :key OR body LIKE :key", key: "%#{params[:search]}%" )
+   
+    else
+      @posts = Post.all
+    end
+  end
+
   # GET /posts/1
   # GET /posts/1.json
   def show

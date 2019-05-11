@@ -1,0 +1,32 @@
+<div class="col-sm-12 ">
+  <br>
+  <div class="row justify-content-center">
+    <% 
+    i = 0
+    @posts.sort{|post| post.created_at}.each do |post|%>
+    
+    <div class="col-3">  
+      <div class="card w-100 h-100 p-3" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%=post.title%></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%=post.user.email%></h6>
+          <p class="card-text"><%=post.body%></p>
+          <a href="/posts/<%=post.id%>" class="card-link">Ver</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    </div>
+    <%
+      i+=1
+    
+      if @posts.count - i < 2 
+        break
+      end
+    
+      if i % 3 == 0 
+    %>
+        </div>
+        <div class="row justify-content-center">
+      <%end%>
+    <%end%>
+</div>
