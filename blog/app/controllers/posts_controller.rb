@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   def search
     if params[:search]
        
-      @posts = Post.where("title like :key OR body LIKE :key", key: "%#{params[:search]}%" )
+      @posts = Post.where("title like :key OR body LIKE :key", key: "%?%", params[:search])
    
     else
       @posts = Post.all
